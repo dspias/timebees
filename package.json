@@ -6,5 +6,14 @@
   "repository": "git@github.com:dspias/timebees.git",
   "author": "Pias Das <pdsperrow95@gmail.com>",
   "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {
+    "@babel/core": "^7.21.3"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.8.0",
+    "react-select": "^5.7.2",
+    "react-switch": "^7.0.0"
+  }
 }
