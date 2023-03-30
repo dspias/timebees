@@ -1,0 +1,10 @@
+{
+  "name": "timebees",
+  "version": "1.0.0",
+  "description": "A Chrome extension for converting local time from other region time",
+  "main": "index.js",
+  "repository": "git@github.com:dspias/timebees.git",
+  "author": "Pias Das <pdsperrow95@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {}
+}
