@@ -7,7 +7,7 @@ Timebees a google chrome extension created for translate diffrent region time to
 * [Technoloiges](#technoloiges)
 * [File Structure](#file-structure)
 * [Deployment](#deployment)
-* [Secrets](#secrets)
+* [Available Scripts Descriptions](#available-scripts-descriptions)
 
 
 ## Technoloiges
