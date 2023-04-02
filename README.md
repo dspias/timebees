@@ -11,32 +11,21 @@ Timebees a google chrome extension created for translate diffrent region time to
 
 
 ## Technoloiges
-* [React.js](https://react.dev/) [Clean version `17.0.2`]
+* [React.js](https://react.dev/) [Clean version `18.2.0`]
 * [Webpack.js](https://webpack.js.org/) [Clean version `5.39.1`]
-* [Babel.js](https://babeljs.io/docs/) [Core version `7.14.6`]
-* [TypeScript](https://www.typescriptlang.org/)
+* [TypeScript](https://www.typescriptlang.org/) [Core version `4.4.2`]
 * [Chrome Extension documentation](https://developer.chrome.com/extensions/getstarted)
 * [Chrome Extensions React Boilerplate](https://github.com/lxieyang/chrome-extension-boilerplate-react)
 
 ## File Structure
 ```
 .
-├── src
-│   ├── assets
-│   ├── components
-│   ├── lib
-│   ├── manifest.json
-│   ├── pages
-│   └── styles
-├── utils
-│   ├── build.js
-│   ├── env.js
-│   └── webserver.js
 ├── build
 ├── package.json
-├── webpack.config.js
+├── public
+├── src
+├── tsconfig.json
 ├── README.md
-├── CHANGELOG.md
 ├── yarn.lock
 └── LICENSE
 ```
@@ -77,33 +66,7 @@ $ NODE_ENV=production npm run build
 
 Now, the content of `build` folder will be the extension ready to be submitted to the Chrome Web Store. Just take a look at the [official guide](https://developer.chrome.com/webstore/publish) to more infos about publishing.
 
-## Secrets
-
-It's a good practice you not commit your secret keys and expose to anyone that have access to the repository.
-
-Import the file `./secrets.<THE-NODE_ENV>.js` on your modules through the module named as `secrets`, so you can do things like this:
-
-_./secrets.development.js_
-
-```js
-export default { key: "123" };
-```
-
-_./src/popup.js_
-
-```js
-import secrets from "secrets";
-ApiCall({ key: secrets.key });
-```
-
-👉 The files with name `secrets.*.js` already are ignored on the repository.
-
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
+## Available Scripts Descriptions
 
 In the project directory, you can run:
 
