@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import Header from './components/Header';
+import TrackAll from './components/TrackAll';
 
 function App() {
+  let [viewPage, setViewPage] = useState('main');
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="fw-md wrapper">
+        <Header />
+        {viewPage === 'main' ? (
+          <>
+            <TrackAll />
+            <h5
+              className="text-blue text-center cursor-pointer fs-xs fw-lg"
+              onClick={e => setViewPage('add')}
+            >
+              + Add New Timezone
+            </h5>
+          </>
+        ) : (
+          <>
+            <p className="text-center">Add location to list</p>
+          </>
+        )}
+      </div>
     </div>
   );
 }

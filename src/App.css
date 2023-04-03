@@ -1,38 +1,145 @@
+.w-full { width: 100%; }
+.gutter { padding-left: 15px; padding-right: 15px; }
+.no-gutter { padding-left: -15px; padding-right: -15px; }
+.flex { display: flex; }
+.justify-content-between {
+  -webkit-box-pack: justify!important;
+  -ms-flex-pack: justify!important;
+  justify-content: space-between!important;
+}
+
+/* font size */
+.fs-xs { font-size: 14px; }
+.fs-sm { font-size: 16px; }
+.fs-md { font-size: 18px; }
+.fs-lg { font-size: 20px; }
+.fs-xl { font-size: 22px; }
+.fs-xxl { font-size: 28px; }
+
+
+/* font weight */
+.fw-sm { font-weight: 300; }
+.fw-md { font-weight: 400; }
+.fw-lg { font-weight: 500; }
+.fw-xl { font-weight: 600; }
+.fw-xxl { font-weight: 700; }
+
+/* text color */
+.text-primary { color: #203B54 !important; }
+.text-secondary { color: #137190 !important; }
+.text-white { color: #FFFFFF !important; }
+.text-black { color: #000000 !important; }
+.text-gray { color: #75859D !important; }
+.text-blue { color: #00A4DB !important; }
+
+/* background color */
+.bg-primary { background-color: #203B54 !important; }
+.bg-secondary { background-color: #137190 !important; }
+.bg-white { background-color: #FFFFFF !important; }
+.bg-black { background-color: #000000 !important; }
+.bg-gray { background-color: #75859D !important; }
+.bg-blue { background-color: #00A4DB !important; }
+
+.wrapper { box-sizing: border-box; }
+
+/* margin */
+.mr-1, .mx-1 { margin-right: 0.5rem; }
+.mr-2, .mx-2 { margin-right: 0.75rem; }
+.mr-3, .mx-3 { margin-right: 1rem; }
+.mr-4, .mx-4 { margin-right: 1.5rem; }
+.mr-5, .mx-5 { margin-right: 1.75rem; }
+.mr-6, .mx-6 { margin-right: 2rem; }
+
+.ml-1, .mx-1 { margin-left: 0.5rem; }
+.ml-2, .mx-2 { margin-left: 0.75rem; }
+.ml-3, .mx-3 { margin-left: 1rem; }
+.ml-4, .mx-4 { margin-left: 1.5rem; }
+.ml-5, .mx-5 { margin-left: 1.75rem; }
+.ml-6, .mx-6 { margin-left: 2rem; }
+
+.mt-1, .my-1 { margin-top: 0.5rem; }
+.mt-2, .my-2 { margin-top: 0.75rem; }
+.mt-3, .my-3 { margin-top: 1rem; }
+.mt-4, .my-4 { margin-top: 1.5rem; }
+.mt-5, .my-5 { margin-top: 1.75rem; }
+.mt-6, .my-6 { margin-top: 2rem; }
+
+.mb-1, .my-1 { margin-bottom: 0.5rem; }
+.mb-2, .my-2 { margin-bottom: 0.75rem; }
+.mb-3, .my-3 { margin-bottom: 1rem; }
+.mb-4, .my-4 { margin-bottom: 1.5rem; }
+.mb-5, .my-5 { margin-bottom: 1.75rem; }
+.mb-6, .my-6 { margin-bottom: 2rem; }
+
+.text-center {
+  text-align: center !important;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* App styles */
 .App {
-  text-align: center;
+  margin: 0;
+  overflow: hidden;
+  min-height: 200px;
+  background-color: #FFFFFF;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+.timezone, timezone:focus-visible {
+  background-color: #203B54;
+  border: none;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
   color: white;
+  font-weight: 600;
+  outline: none;
+  font-size: 14px;
+}
+.track-all {
+  border-bottom: 1px solid #DBDEE3;
+}
+.d-none {
+  display: none;
 }
 
-.App-link {
-  color: #61dafb;
+/* checkbox start */
+.toggler label {
+	cursor: pointer;
+	text-indent: -9999px;
+	width: 44px;
+	height: 24px;
+	background: #ffffff;
+	display: block;
+  border: 1px solid #CDD0D7;
+	border-radius: 100px;
+	position: relative;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.toggler label:after {
+	content: '';
+	position: absolute;
+	top: 1px;
+	left: 2px;
+	width: 22px;
+	height: 22px;
+	background: #00A4DB;
+	border-radius: 90px;
+	transition: 0.15s;
 }
+
+.toggler input:checked + label:after {
+	background: #00A4DB;
+}
+
+.toggler input:checked + label:after {
+	left: calc(100% - 2px);
+	transform: translateX(-100%);
+}
+
+.toggler label:active:after {
+	width: 20px;
+}
+/* checkbox end */
