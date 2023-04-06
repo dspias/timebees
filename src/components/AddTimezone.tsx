@@ -5,7 +5,7 @@ type ChangeFunction = (s: string) => void;
 const AddTimezone = ({change}: {change: ChangeFunction}) => {
   return (
     <>
-      <p onClick={e => change('main')} className="cursor-pointer">BACK</p>
+      <p onClick={e => change('main')} className="cursor-pointer my-4">BACK</p>
       <h4 className="fs-xxl text-primary my-2 text-center">Add New Timezone</h4>
       <div className="my-1">
         <SelectDropdown classes="add-timezone" isFullText={true}/>
