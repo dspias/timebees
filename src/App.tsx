@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import './App.css';
+import AddTimezone from './components/AddTimezone';
 import Header from './components/Header';
+import SavedTimezones from './components/SavedTimezones';
 import TrackAll from './components/TrackAll';
+import shareIcon from './share-feedback.png';
 
 function App() {
   let [viewPage, setViewPage] = useState('main');
@@ -18,10 +21,19 @@ function App() {
             >
               + Add New Timezone
             </h5>
+            <SavedTimezones />
+            <div className="gutter">
+              <p className="cursor-pointer flex mb-4">
+                <img src={shareIcon} alt="share Icon" width={18} height={18} />
+                <span className="ml-2 fs-sm text-primary">Share your feedback</span>
+              </p>
+            </div>
           </>
         ) : (
           <>
-            <p className="text-center">Add location to list</p>
+            <div className="gutter">
+              <AddTimezone change={setViewPage}/>
+            </div>
           </>
         )}
       </div>

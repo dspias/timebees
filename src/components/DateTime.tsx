@@ -14,7 +14,7 @@ const DateTime = () => {
     date: string | Date | Dayjs,
     timeFormat?: number | null,
   ) => {
-    return dayjs(date).format(timeFormat === 12 ? "h:mmA" : "HH:mm");
+    return dayjs(date).format(timeFormat === 12 ? "h:mm A" : "HH:mm");
   };
 
   return(
