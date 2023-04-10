@@ -28,9 +28,9 @@ function App({localtimezone, timezonelist, isalltrack}: StorageType) {
             >
               + Add New Timezone
             </h5>
-            <SavedTimezones timezonelist={zonelist} />
+            <SavedTimezones timezonelist={zonelist} updateList={setZonelist} />
             <div className="gutter">
-              <p className="cursor-pointer flex mb-4">
+              <p className="cursor-pointer flex my-4">
                 <img src={shareIcon} alt="share Icon" width={18} height={18} />
                 <span className="ml-2 fs-sm text-primary">Share your feedback</span>
               </p>

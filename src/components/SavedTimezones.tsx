@@ -15,9 +15,10 @@ type TimezoneType = {
   zoneEnd?: number | null;
   nextAbbreviation?: string | null;
 };
+type updateListFunction = (s: string[]) => void;
+type callbackType = (s: string) => void;
 
-
-const Timezone = ({timezone}: {timezone: TimezoneType}) => {
+const Timezone = ({timezone, callback}: {timezone: TimezoneType, callback: callbackType}) => {
   const truncate = (str: string, length: number = 17) => {
     return str.length > length ? str.substring(0, length) + ".." : str;
   }
@@ -29,9 +30,10 @@ const Timezone = ({timezone}: {timezone: TimezoneType}) => {
     gmtOffset = gmtOffset / 3600;
     return `UTC/GMT ${(gmtOffset >= 0) ? '+' : ''}${gmtOffset.toFixed(2)}`
   };
+  
   return (
     <div className="my-2 timebox">
-      <div className="flex">
+      <div className="flex p-relative">
         <div className="time-description bg-secondary text-white text-center">
           <p className="fs-xs fw-md my-2 mx-2" title={getCity(timezone.zoneName)}>
             {truncate(getCity(timezone.zoneName), 9)}
@@ -51,18 +53,31 @@ const Timezone = ({timezone}: {timezone: TimezoneType}) => {
             {offsetConvert(timezone.gmtOffset)}
           </p>
         </div>
+        <div
+          className="delete-icon cursor-pointer"
+          onClick={e => callback(timezone.zoneName)}
+        >
+          x
+        </div>
       </div>
     </div>
   );
 };
 
-const SavedTimezones = ({ timezonelist }: { timezonelist: string[] }) => {
+const SavedTimezones = ({ timezonelist, updateList }: { timezonelist: string[], updateList: updateListFunction}) => {
+
   const lists = timezones.filter((timezone: TimezoneType) => timezonelist.includes(timezone.zoneName));
+  const setTimezoneList = (value: string) => {
+  timezonelist = timezonelist.filter((item) => item !== value);
+  chrome.storage.sync.set({ timezonelist }).then(() => {
+    updateList(timezonelist);
+  });
+  };
   return (
     <>
       <div className="gutter">
         {lists.map((timezone: TimezoneType, index: number) => (
-            <Timezone key={index} timezone={timezone} />
+            <Timezone key={index} timezone={timezone} callback={setTimezoneList}/>
           ))}
       </div>
     </>

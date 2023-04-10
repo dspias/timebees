@@ -209,3 +209,18 @@
   box-shadow: none;
   border: none;
 }
+
+.p-relative {
+  position: relative !important;
+}
+.delete-icon {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: -5px;
+  font-size: 20px;
+  color: red;
+}
+.timebox:hover .delete-icon {
+  display: inherit;
+}
