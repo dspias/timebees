@@ -45,7 +45,7 @@ const Timezone = ({timezone}: {timezone: TimezoneType}) => {
             {truncate(timezone.countryName)}
           </p>
           <h4 className="fs-lg fw-xxl my-0 text-primary">
-            <DateTime />
+            <DateTime zone={timezone.zoneName} />
           </h4>
           <p className="mb-0 fs-xs fw-xs text-gray" title={timezone.countryName}>
             {offsetConvert(timezone.gmtOffset)}
@@ -56,12 +56,13 @@ const Timezone = ({timezone}: {timezone: TimezoneType}) => {
   );
 };
 
-const SavedTimezones = () => {
+const SavedTimezones = ({ timezonelist }: { timezonelist: string[] }) => {
+  const lists = timezones.filter((timezone: TimezoneType) => timezonelist.includes(timezone.zoneName));
   return (
     <>
       <div className="gutter">
-        {timezones.map((timezone: TimezoneType, index: number) => (
-              <Timezone key={index} timezone={timezone} />
+        {lists.map((timezone: TimezoneType, index: number) => (
+            <Timezone key={index} timezone={timezone} />
           ))}
       </div>
     </>

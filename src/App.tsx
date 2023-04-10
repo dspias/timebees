@@ -6,22 +6,29 @@ import SavedTimezones from './components/SavedTimezones';
 import TrackAll from './components/TrackAll';
 import shareIcon from './share-feedback.png';
 
-function App() {
+type StorageType = {
+  localtimezone?: string | undefined;
+  timezonelist?: string[] | undefined;
+  isalltrack?: boolean | undefined;
+};
+
+function App({localtimezone, timezonelist, isalltrack}: StorageType) {
   let [viewPage, setViewPage] = useState('main');
+  let [zonelist, setZonelist] = useState(() => timezonelist ? timezonelist : []);
   return (
     <div className="App">
       <div className="fw-md wrapper">
-        <Header />
+        <Header localtimezone={localtimezone}/>
         {viewPage === 'main' ? (
           <>
-            <TrackAll />
+            <TrackAll isalltrack={isalltrack}/>
             <h5
               className="text-blue text-center cursor-pointer fs-xs fw-lg"
               onClick={e => setViewPage('add')}
             >
               + Add New Timezone
             </h5>
-            <SavedTimezones />
+            <SavedTimezones timezonelist={zonelist} />
             <div className="gutter">
               <p className="cursor-pointer flex mb-4">
                 <img src={shareIcon} alt="share Icon" width={18} height={18} />
@@ -32,7 +39,7 @@ function App() {
         ) : (
           <>
             <div className="gutter">
-              <AddTimezone change={setViewPage}/>
+              <AddTimezone change={setViewPage} timezonelist={zonelist} updateList={setZonelist}/>
             </div>
           </>
         )}
