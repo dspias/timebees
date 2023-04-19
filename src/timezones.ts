@@ -13,6 +13,6 @@ type TimezoneType = {
     zoneEnd?: number | null;
     nextAbbreviation?: string | null;
 };
-const timezones: TimezoneType[]  = data;
+const timezones: TimezoneType[] = data;
 
 export default timezones;

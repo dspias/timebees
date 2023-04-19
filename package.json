@@ -12,6 +12,7 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "@webcomponents/custom-elements": "^1.6.0",
     "dayjs": "^1.11.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -48,5 +49,6 @@
   "license": "MIT",
   "devDependencies": {
     "@types/chrome": "^0.0.228"
-  }
+  },
+  "main": "index.js"
 }

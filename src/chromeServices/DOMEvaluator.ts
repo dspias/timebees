@@ -1,19 +1,62 @@
-import { DOMMessage, DOMMessageResponse } from '../types';
+import './TimeComponent';
+import DetectTime from './DetectTime';
+import ConvertTime from './ConvertTime';
 
-const messagesFromReactAppListener = (msg: DOMMessage, sender: chrome.runtime.MessageSender, sendResponse: (response: DOMMessageResponse) => void) => {
-  console.log('[content.js]. Message received', msg);
+chrome.storage.sync.get().then((storage) => {
+  const timeComponent = document.createElement("time-component");
+  document.body.appendChild(timeComponent);
 
-  const response: DOMMessageResponse = {
-    title: "aasfasdfasdf",
-    headlines: Array.from(document.getElementsByTagName<"h1">("h1")).map(h1 => h1.innerText)
+  // set time component position
+  const setContext = (context:any) =>
+  timeComponent.setAttribute(
+    "context",
+    JSON.stringify(context)
+  );
+
+  // get time component position 
+  const getTimeComponentPosition = (time: string, abbreviation?: string | null, convertedTime?: string | null) => {
+    const rangeBounds = window
+      ?.getSelection()
+      ?.getRangeAt(0)
+      ?.getBoundingClientRect();
+      console.log(rangeBounds);
+    const timeAnchor = rangeBounds && {
+      left: rangeBounds.left,
+      top: rangeBounds.top + window.pageYOffset ,
+      width: rangeBounds.width,
+      height: rangeBounds.height
+    };
+    const timeBubble = rangeBounds && {
+      left: rangeBounds.left + rangeBounds.width / 2 - 150,
+      top: rangeBounds.top + window.pageYOffset + rangeBounds.height + 10,
+      visibility: 'visible'
+    };
+    return {
+      anchor: timeAnchor,
+      bubble: timeBubble,
+      localtimezone: storage?.localtimezone,
+      time: { time, abbreviation, convertedTime }
+    };
   };
-
-  console.log('[content.js]. Message response', response);
-
-  sendResponse(response)
-}
-
-/**
- * Fired when a message is sent from either an extension process or a content script.
- */
-chrome.runtime.onMessage.addListener(messagesFromReactAppListener);
+  
+  const getSelectedText = () => window.getSelection()?.toString();
+  
+  document.addEventListener("click", () => {
+    const selectedText = getSelectedText();    
+    if (selectedText && selectedText.length > 0) {
+      const [time, abbreviation] = DetectTime(selectedText);
+      if (time) {
+        const convertedTime = ConvertTime(time, abbreviation, storage?.localtimezone);
+        const position= getTimeComponentPosition(time, abbreviation, convertedTime);
+        setContext(position);
+      }
+    }
+  });
+  
+  document.addEventListener("selectionchange", () => {
+    const selectedText = getSelectedText();
+    if (selectedText?.length === 0 || !selectedText) {
+      setContext({bubble: { visibility: 'hidden' }, localtimezone: storage?.localtimezone, time: null });
+    }
+  });
+});
