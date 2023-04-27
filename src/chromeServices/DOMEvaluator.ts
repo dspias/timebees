@@ -18,7 +18,6 @@ const getTimeComponentPosition = (time: string, abbreviation?: string | null, co
     ?.getSelection()
     ?.getRangeAt(0)
     ?.getBoundingClientRect();
-    console.log(rangeBounds);
   const timeAnchor = rangeBounds && {
     left: rangeBounds.left,
     top: rangeBounds.top + window.pageYOffset ,
@@ -40,7 +39,7 @@ const getTimeComponentPosition = (time: string, abbreviation?: string | null, co
 
 const getSelectedText = () => window.getSelection()?.toString();
 
-document.addEventListener("click", () => {
+document.addEventListener("click", (e) => {
   chrome.storage.sync.get().then((storage) => {
     const selectedText = getSelectedText();    
     if (selectedText && selectedText.length > 0) {

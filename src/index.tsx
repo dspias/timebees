@@ -8,7 +8,6 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 chrome.storage.sync.get().then((storage) => {
-  console.log(storage);
   root.render(
     <React.StrictMode>
       <App localtimezone={storage.localtimezone} timezonelist={storage.timezonelist} isalltrack={storage.isalltrack}/>
