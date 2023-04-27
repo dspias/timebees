@@ -44,12 +44,15 @@ chrome.storage.sync.get().then((storage) => {
   document.addEventListener("click", () => {
     const selectedText = getSelectedText();    
     if (selectedText && selectedText.length > 0) {
-      const [time, abbreviation] = DetectTime(selectedText);
-      if (time) {
-        const convertedTime = ConvertTime(time, abbreviation, storage?.localtimezone);
-        const position= getTimeComponentPosition(time, abbreviation, convertedTime);
-        setContext(position);
-      }
+      const isTrack = storage?.isalltrack;
+      if (isTrack === undefined || isTrack === true) {
+        const [time, abbreviation] = DetectTime(selectedText);
+        if (time && abbreviation) {
+          const convertedTime = ConvertTime(time, abbreviation, storage?.localtimezone);
+          const position= getTimeComponentPosition(time, abbreviation, convertedTime);
+          setContext(position);
+        }
+      } 
     }
   });
   

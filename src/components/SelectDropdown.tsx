@@ -20,7 +20,7 @@ const SelectDropdown = ({selectedValue, classes = "timezone", isFullText = false
   };
   const list: SelectType[] = timezones.map((timezone) => {
     const zone = timezone.zoneName.split('/');
-    const text = `${(zone[zone.length-1].replace(/_|-/," "))} ${(isFullText) ? `(${timezone.abbreviation} ${offsetConvert(timezone.gmtOffset)})` : ''}`;
+    const text = `${(zone[zone.length-1].replaceAll(/_|-/g," "))} ${(isFullText) ? `(${timezone.abbreviation} ${offsetConvert(timezone.gmtOffset)})` : ''}`;
     return { text: text, value: timezone.zoneName };
   });
   const [selectedTimezone, setSelectedTimezone] = useState(selectedValue);

@@ -1,6 +1,7 @@
 import '@webcomponents/custom-elements';
 import timezones from '../timezones';
 import template, {styled, StyleType} from './Template';
+import { convertFormatTime } from './ConvertTime';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
@@ -70,14 +71,17 @@ export default class TimeComponent extends HTMLElement {
       this.styleElement!.textContent = styled({ anchor: context.anchor, bubble: context?.bubble });
 
       // show in the window popup header
-      this.timezoneName!.textContent = (timezone) ? `${timezone.countryName}, ${timezone.countryCode}` : 'No Timzone';
+      this.timezoneName!.textContent = (timezone) ? `${timezone.countryName}, ${timezone.abbreviation}` : 'No Timzone';
 
       const time = context?.time;
-      this.convertedTime!.textContent = (time) ? time.convertedTime : '-';
-      this.localtimezone!.textContent = (timezone) ? timezone.abbreviation : '-';
-
-      this.fromTime!.textContent = (time) ? time.time : '-';
+      // from time
+      this.fromTime!.textContent = (time) ? convertFormatTime(time.time, 'HH:mm', 12) : '-';
       this.fromtimezone!.textContent = (time) ? time.abbreviation : '-';
+
+      // to time
+      this.convertedTime!.textContent = (time) ? time.convertedTime : '-';
+      this.localtimezone!.textContent = (timezone) ? timezone.zoneName : '-';
+
     }
   }
 }

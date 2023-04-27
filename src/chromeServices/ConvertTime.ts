@@ -11,6 +11,13 @@ const formatTime = (
 ) => {
   return dayjs(date).tz(zone).format(timeFormat === 12 ? "h:mm A" : "HH:mm");
 };
+export const convertFormatTime = (
+  date: string | Date | Dayjs,
+  structure: string,
+  timeFormat?: number,
+) => {
+  return dayjs(date, structure).format(timeFormat === 12 ? "h:mm A" : "HH:mm");
+};
 
 const ConvertTime = (time?: string | null, zone?: string | null, targetZone?: string | null) => {
   if (!time) return '';

@@ -1,12 +1,10 @@
-import timezones from "../timezones";
-
 const template:string = `
   <div id="timeAnchor" class="time-anchor"></div>
   <div id="timeComponent" class="time-bubble">
     <div style="width: 300px;">
       <div class="time-header">
         <p id="timezoneName"></p>
-        <p>Options</p>
+        <p></p>
       </div>
       <div class="time-content">
         <div class="timebox fromTime">
