@@ -40,27 +40,31 @@ const getTimeComponentPosition = (time: string, abbreviation?: string | null, co
 const getSelectedText = () => window.getSelection()?.toString();
 
 document.addEventListener("click", (e) => {
-  chrome.storage.sync.get().then((storage) => {
-    const selectedText = getSelectedText();    
-    if (selectedText && selectedText.length > 0) {
-      const isTrack = storage?.isalltrack;
-      if (isTrack === undefined || isTrack === true) {
-        const [time, abbreviation] = DetectTime(selectedText);
-        if (time && abbreviation) {
-          const convertedTime = ConvertTime(time, abbreviation, storage?.localtimezone);
-          const position= getTimeComponentPosition(time, abbreviation, convertedTime, storage?.localtimezone);
-          setContext(position);
-        }
-      } 
-    }
-  });
+  try {
+    chrome.storage.sync.get().then((storage) => {
+      const selectedText = getSelectedText();    
+      if (selectedText && selectedText.length > 0) {
+        const isTrack = storage?.isalltrack;
+        if (isTrack === undefined || isTrack === true) {
+          const [time, abbreviation] = DetectTime(selectedText);
+          if (time && abbreviation) {
+            const convertedTime = ConvertTime(time, abbreviation, storage?.localtimezone);
+            const position= getTimeComponentPosition(time, abbreviation, convertedTime, storage?.localtimezone);
+            setContext(position);
+          }
+        } 
+      }
+    });
+  } catch (e) {}
 });
 
 document.addEventListener("selectionchange", () => {
-  chrome.storage.sync.get().then((storage) => {
-    const selectedText = getSelectedText();
-    if (selectedText?.length === 0 || !selectedText) {
-      setContext({bubble: { visibility: 'hidden' }, localtimezone: storage?.localtimezone, time: null });
-    }
-  });
+  try {
+    chrome.storage.sync.get().then((storage) => {
+      const selectedText = getSelectedText();
+      if (selectedText?.length === 0 || !selectedText) {
+        setContext({bubble: { visibility: 'hidden' }, localtimezone: storage?.localtimezone, time: null });
+      }
+    });
+  } catch (e) {}
 });

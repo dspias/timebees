@@ -51,11 +51,12 @@ export type StyleType = {
 export const styled = ({ anchor, bubble }: StyleType) => `
   .time-anchor {
     position: absolute;
-    visibility: hidden;
+    visibility: visible;
     left: ${anchor?.left || 0}px;
     top: ${anchor?.top || 0}px;
     width: ${anchor?.width || 0}px;
     height: ${anchor?.height || 0}px;
+    border-bottom: 4px solid #3aa4db;
   }
   #timeComponent {
     visibility: ${bubble?.visibility || 'hidden'};
